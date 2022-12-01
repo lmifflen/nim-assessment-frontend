@@ -57,7 +57,7 @@ function OrderModal({ order, setOrderModal }) {
       />
       <div className={styles.orderModalContent}>
         <h2>Place Order</h2>
-        {errorMessage && <p> {errorMessage} </p>}
+        {error && <p> {error} </p>}
         <form className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name">
