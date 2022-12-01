@@ -5,6 +5,7 @@ function OrderModal({ order, setOrderModal }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
 
   const placeOrder = async () => {
     const response = await fetch("/api/orders", {
@@ -22,6 +23,24 @@ function OrderModal({ order, setOrderModal }) {
     const data = await response.json();
     console.log(data);
   };
+  const validatePhoneNumber = (number) => {
+    const re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+
+    return re.test(number);
+  };
+  const handleValidation = () => {
+    if (name && phone && address) {
+      if (validatePhoneNumber(phone)) {
+        placeOrder();
+      } else {
+        setError("Please enter a valid phone number");
+      }
+    } else {
+      setError("Please fill in all fields");
+    }
+
+    return false;
+  };
   return (
     <>
       <div
@@ -38,6 +57,7 @@ function OrderModal({ order, setOrderModal }) {
       />
       <div className={styles.orderModalContent}>
         <h2>Place Order</h2>
+        {error && <p> {error} </p>}
         <form className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name">
@@ -49,6 +69,7 @@ function OrderModal({ order, setOrderModal }) {
                 }}
                 type="text"
                 id="name"
+                required
               />
             </label>
           </div>
@@ -62,6 +83,7 @@ function OrderModal({ order, setOrderModal }) {
                 }}
                 type="phone"
                 id="phone"
+                required
               />
             </label>
           </div>
@@ -75,6 +97,7 @@ function OrderModal({ order, setOrderModal }) {
                 }}
                 type="phone"
                 id="address"
+                required
               />
             </label>
           </div>
@@ -89,7 +112,7 @@ function OrderModal({ order, setOrderModal }) {
           </button>
           <button
             onClick={() => {
-              placeOrder();
+              handleValidation();
             }}
             className={styles.orderModalPlaceOrder}
           >
