@@ -46,7 +46,7 @@ function OrderModal({ order, setOrderModal }) {
             <label htmlFor="name">
               Name
               <input
-                onClick={(e) => {
+                onChange={(e) => {
                   e.preventDefault();
                   setName(e.target.value);
                 }}
@@ -59,7 +59,7 @@ function OrderModal({ order, setOrderModal }) {
             <label htmlFor="phone">
               Phone
               <input
-                onClick={(e) => {
+                onChange={(e) => {
                   e.preventDefault();
                   setPhone(e.target.value);
                 }}
@@ -72,7 +72,7 @@ function OrderModal({ order, setOrderModal }) {
             <label htmlFor="address">
               Address
               <input
-                onClick={(e) => {
+                onChange={(e) => {
                   e.preventDefault();
                   setAddress(e.target.value);
                 }}
