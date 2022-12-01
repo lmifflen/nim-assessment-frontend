@@ -19,7 +19,7 @@ function OrderConfirmation(confirmation) {
       <br />
       Your order is:
       {order.confirmation.confirmation.items.map((item) => (
-        <div>{item.quantity} -</div>
+        <div>{item.quantity} - {item.item.name}</div>
       ))}
       <br />
       {/* {order.confirmation.confirmation.items} */}
